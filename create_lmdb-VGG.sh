@@ -1,17 +1,3 @@
-##!/usr/bin/bash
-#DATA=/home/mylinux/caffe/MyProject/CheckAV
-#rm -rf $DATA/img_train_lmdb
-#rm -rf $DATA/img_test_lmdb
-
-#/home/mylinux/caffe/build/tools/convert_imageset --shuffle \
-#$DATA/train/ $DATA/train_label.txt $DATA/img_train_lmdb
-
-#/home/mylinux/caffe/build/tools/convert_imageset \
-#$DATA/val/ $DATA/test_label.txt $DATA/img_test_lmdb
-
-
-
-
 #!/bin/bash
 
 EXAMPLE=/home/mylinux/caffe/MyProject/CheckAV
@@ -23,8 +9,8 @@ VAL_DATA_ROOT=/home/mylinux/caffe/MyProject/CheckAV
 
 RESIZE=true
 if $RESIZE;then
-	RESIZE_HEIGHT=128
-	RESIZE_WIDTH=128
+	RESIZE_HEIGHT=224
+	RESIZE_WIDTH=224
 else
 	RESIZE_HEIGHT=0
 	RESIZE_WIDTH=0
@@ -52,7 +38,7 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset \
     --shuffle \
     $TRAIN_DATA_ROOT \
     $DATA/train_label.txt \
-    $EXAMPLE/img_train_lmdb
+    $EXAMPLE/train_lmdb
 
 echo "Creating val lmdb..."
 
@@ -62,7 +48,7 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     --shuffle \
     $VAL_DATA_ROOT \
     $DATA/test_label.txt \
-    $EXAMPLE/img_val_lmdb
+    $EXAMPLE/val_lmdb
 
 echo "Done."
 #rm -rf $DATA/image_train_lmdb
